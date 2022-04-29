@@ -1,0 +1,75 @@
+name: JS
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+    paths:
+      - "js/**"
+      - "config/**"
+      - "tool/generate-i18n-testlang"
+      - ".github/workflows/js.yml"
+  pull_request:
+    paths:
+      - "js/**"
+      - "config/**"
+      - "tool/generate-i18n-testlang"
+      - ".github/workflows/js.yml"
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node:
+          #- 10.x
+          #- 12.x
+          - 14.x
+    steps:
+      - uses: actions/checkout@v3
+      - name: Load variables from file
+        uses: antifree/json-to-variables@v1.0.1
+        with:
+          filename: .github/workflows/utils/variables.json
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Cache Node.js modules
+        uses: actions/cache@v2.1.6
+        with:
+          path: js/node_modules
+          key:          ${{ runner.OS }}-node-${{ matrix.node }}-${{ env.json_cache-version_node }}-${{ hashFiles('js/yarn.lock') }}
+          restore-keys: ${{ runner.OS }}-node-${{ matrix.node }}-${{ env.json_cache-version_node }}-
+      - name: "Fetch deps"
+        working-directory: js
+        run: make node_modules
+        env:
+          CI: true
+      - name: "Run tests"
+        working-directory: js
+        run: make test
+        env:
+          CI: true
+      - name: "Run lint"
+        working-directory: js
+        run: make lint
+        env:
+          CI: true
+      - name: Look for i18n dead keys
+        run: ./tool/check-dead-i18n/check.js
+      - name: Look for js dead code
+        working-directory: js
+        run: make js.unused_exports
+      - name: Building web client
+        working-directory: js
+        run: make web.build
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          file: ./js/coverage/coverage-final.json
+          flags: js.unittests
+          env_vars: OS,NODE_VERSION
+          name: codecov-umbrella
+          fail_ci_if_error: false

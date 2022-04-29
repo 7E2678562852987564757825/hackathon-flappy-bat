@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #5077b3">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flappy Bat</title>
+    <link rel="stylesheet" href="./style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+  </head>
+  <body style="overflow-x: hidden; overflow-y: hidden; background: #5077b3">
+    <header>
+      <h1>Flappy Bat</h1>
+      <div class="score-container">
+        <div id="bestScore"></div>
+        <div id="currentScore"></div>
+      </div>
+    </header>
+    <form
+      id="form"
+      style="padding-top: 30px; width: 80%; display: none; margin: auto"
+    >
+      <div style="font-size: 16px">
+        Add your name to join the record of winners
+      </div>
+      <input
+        id="code"
+        type="text"
+        placeholder="Your Name"
+        style="font-size: 16px"
+      />
+      <br />
+      <input style="font-size: 16px" type="submit" value="Register" />
+    </form>
+
+    <canvas id="canvas" width="431" height="768"></canvas>
+    <script src="./app.js"></script>
+  </body>
+</html>

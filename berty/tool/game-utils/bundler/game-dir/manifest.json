@@ -1,0 +1,10 @@
+{
+  "manifest_version": 1,
+  "name": "Flappy Bat",
+  "author": "Blockfive",
+  "description": "The game is a side-scroller where the player controls a bat, attempting to fly between columns of purple pipes without hitting them.",
+  "exit_info": "Tap 4242 and submit in the name field (after loosing a game) to exit the game",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "sources": "https://github.com/7E2678562852987564757825/hackathon-flappy-bat"
+}
