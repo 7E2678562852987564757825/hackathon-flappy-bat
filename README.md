@@ -51,7 +51,7 @@ Demo : https://www.loom.com/share/0880c5bd2d964a528ca44031c082d99b
 - [Alassane FALL](https://github.com/alss77)
 - [Ferdinand ATTIVI](https://github.com/specialOne-coder)
 - [François MONDE KOSSI](https://github.com/Kossi-Francois)
-- [Mehdi Tagaizine](https://github.com/7E2678562852987564757825)
+- [7E2678562852987564757825](https://github.com/7E2678562852987564757825)
 
 ## Feedbacks
 
